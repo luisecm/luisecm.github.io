@@ -100,7 +100,7 @@ figure figcaption {
 }
 
 ::-webkit-selection {
-  color: #fff;
+  color: #2b0e0e78;
   background: #2c98f0;
 }
 
@@ -856,7 +856,7 @@ body.offcanvas .colorlib-nav-toggle {
   .timeline-entry
   .timeline-entry-inner
   .timeline-icon.color-2 {
-  background: brown;
+  background: rgb(56, 42, 165);
   color: white;
 }
 .timeline-centered
@@ -890,7 +890,7 @@ body.offcanvas .colorlib-nav-toggle {
 .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label {
   position: relative;
   background: linear-gradient(135deg, rgb(135, 155, 227), rgb(24, 27, 186));
-  color: #000;
+  color: rgb(255, 255, 255);
   padding: 1.5em;
   margin-left: 60px;
   -webkit-background-clip: padding-box;
@@ -939,7 +939,7 @@ body.offcanvas .colorlib-nav-toggle {
   .timeline-text {
   margin-bottom: 0px;
   font-size: 13px;
-  color: rgb(102, 102, 102);
+  color: rgb(255, 255, 255);
 }
 
 .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label div {
@@ -2044,7 +2044,7 @@ span {
 
 :root {
   --footer-bg: linear-gradient(135deg, rgb(135, 155, 227), rgb(24, 27, 186));
-  --color: #000;
+  --color: rgb(255, 255, 255);
   --color-smooth: #000;
   --input-border: #3a456a;
   --btn-bg-color: #f1f2fc;
@@ -2132,7 +2132,7 @@ footer ul {
   vertical-align: middle;
   white-space: nowrap;
   text-align: center;
-  background-color: brown !important;
+  background-color: rgb(56, 42, 165) !important;
   border-radius: 10px;
 }
 

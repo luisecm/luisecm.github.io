@@ -73,6 +73,15 @@ export const experience = [
   },
 ];
 
+export const repos = [
+  {
+    author: "luisecm",
+    name: "luisecm",
+    description: "My personal portfolio",
+    language: "TypeScript",
+  },
+];
+
 export const education = [
   {
     title: "Bachelor in Information Technology Management",
