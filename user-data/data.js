@@ -12,11 +12,11 @@ export const skills = [
 
 export const experience = [
   {
-    title: "Satellite IM",
+    title: "Freelance Work",
     duration: "February 2022 - Present",
     subtitle: "Test Automation Engineer",
     details: [
-      "Design, implement and maintain test automation frameworks for Web, Mobile and Desktop applications using JavaScript/TypeScript and CypressJS, WebdriverIO, Appium and Playwright.",
+      "Design, implement and maintain test automation frameworks for Web and Mobile applications using JavaScript/TypeScript and CypressJS, WebdriverIO, Appium and Playwright.",
       "Increase coverage of test suite in order to reduce the time spent during regression, smoke and sanity testing cycles by manual testing team",
       "Setup and maintain CI/CD pipelines for building apps, set up test environment, running automated tests and releasing applications with Github Actions and implemented other workflows to improve quality",
       "Create and execute manual test plans and select and prioritize automation candidate tests",
