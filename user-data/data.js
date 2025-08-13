@@ -1,7 +1,7 @@
 export const bio = [
   "Hello, I'm Luis Cardeña!",
   "Highly experienced <strong>QA Engineer</strong> with over 12 years of expertise in manual and automated testing for web, mobile, and desktop applications. Proven track record in designing and maintaining test automation frameworks, setting up CI/CD pipelines, and leading QA teams.",
-  "Skilled in Cypress, Postman, SQL, NoSQL, and various other testing tools. Adept at improving QA processes and ensuring high- quality software delivery",
+  "Skilled in automation tools, programming languages, CI/CD, database and API testing. Adept at improving QA processes and ensuring high- quality software delivery",
 ];
 
 export const skills = [
@@ -12,17 +12,48 @@ export const skills = [
 
 export const experience = [
   {
-    title: "Freelance Work",
-    duration: "February 2022 - Present",
-    subtitle: "Test Automation Engineer",
+    title: "NuOrder by Lightspeed",
+    duration: "January 2024 - Present",
+    subtitle: "Sr. QA Engineer",
     details: [
-      "Design, implement and maintain test automation frameworks for Web and Mobile applications using JavaScript/TypeScript and CypressJS, WebdriverIO, Appium and Playwright.",
-      "Increase coverage of test suite in order to reduce the time spent during regression, smoke and sanity testing cycles by manual testing team",
-      "Setup and maintain CI/CD pipelines for building apps, set up test environment, running automated tests and releasing applications with Github Actions and implemented other workflows to improve quality",
-      "Create and execute manual test plans and select and prioritize automation candidate tests",
+      "Performed functional and non-functional testing of new features and system enhancements",
+      "Executed comprehensive QA testing across 3+ environments and multiple release cycles, ensuring 100% release readiness and minimizing production issues",
+      "Developed, maintained, and optimized automated test frameworks, increasing test coverage and reducing manual testing time",
+      "Designed, prioritized, and executed test cases, identifying and automating high-value regression scenarios, accelerating test execution",
+      "Conducted code reviews for automated test scripts, improving code quality and maintainability, and reducing test script errors",
     ],
-    tags: ["Playwright", "Appium", "WebdriverIO", "Cypress"],
-    icon: "truck ",
+    tags: [
+      "Playwright",
+      "Appium",
+      "WebdriverIO",
+      "MongoDB",
+      "Typescript",
+      "Python",
+      "API",
+      "Google Cloud",
+    ],
+    icon: "qrcode",
+  },
+  {
+    title: "Satellite IM",
+    duration: "February 2022 - December 2023",
+    subtitle: "Software Development Engineer in Test",
+    details: [
+      "Designed, implemented, and maintained test automation frameworks for web, mobile, and desktop blockchain messaging applications, reducing manual testing effort by 40%",
+      "Set up and upheld CI/CD pipelines, cutting build and test execution time by 30%",
+      "Created and executed manual test plans, selecting and prioritizing automation candidates, leading to a 25% reduction in regression testing time",
+      "Conducted code reviews and provided feedback, improving code quality and reducing defect leakage rate",
+      "Developed and sustained documentation for test procedures, frameworks and tools",
+    ],
+    tags: [
+      "Cypress",
+      "Appium",
+      "WebdriverIO",
+      "Playwright",
+      "PostgreSQL",
+      "CI/CD",
+    ],
+    icon: "group",
   },
   {
     title: "Encora",
@@ -48,7 +79,7 @@ export const experience = [
   },
   {
     title: "AgileThought",
-    duration: "February 2018 - December 2020",
+    duration: "March 2018 - December 2020",
     subtitle: "QA Lead",
     details: [
       "Managed a small team of remote testers and at the same time continued executing my activities as QA Engineer for the team",
@@ -61,7 +92,7 @@ export const experience = [
   },
   {
     title: "AgileThought",
-    duration: "May 2015 - January 2018",
+    duration: "May 2015 - February 2018",
     subtitle: "QA Engineer",
     details: [
       "Created, maintained and executed test plans for ETL interfaces for one of the top companies on disability claims management",
@@ -71,14 +102,58 @@ export const experience = [
     tags: ["SQL", "ETL", "OpenEdge", "Data Testing", "QA"],
     icon: "group",
   },
+  {
+    title: "Bepensa",
+    duration: "April 2014 - April 2015",
+    subtitle: "QA Lead",
+    details: [
+      "Designed and applied QA processes, streamlining operations and improving test coverage by 20%",
+      "Created, preserved, and carried out test plans, leading to a 15% reduction in critical defects post-release",
+      "Led a team of testers for a startup company, delivering a product to a major beverage company 10% ahead of schedule",
+      "Conducted exploratory testing, identifying critical issues early and increasing application stability by 25%",
+      "Analyzed test results and furnished detailed reports, improving stakeholder decision-making efficiency by 30%",
+    ],
+    tags: ["SQL", "Android", "iOS", "QA", "Test Planning"],
+    icon: "heartbeat",
+  },
+  {
+    title: "4th Source",
+    duration: "November 2012 - April 2014",
+    subtitle: "QA Analyst",
+    details: [
+      "Executed test plans for desktop applications, achieving a 95% bug resolution rate during the first testing cycle",
+      "Developed SQL queries, improving the execution of test cases and reducing runtime by 20%",
+      "Designed documentation for QA processes, reducing onboarding time for new QA hires by 30%",
+      "Participated in requirement reviews, providing feedback that improved testability and reduced post-release defects by 15%",
+    ],
+    tags: ["SQL", "IVR", "desktop", "Test Planning"],
+    icon: "qrcode",
+  },
 ];
 
 export const repos = [
   {
-    author: "luisecm",
-    name: "luisecm",
-    description: "My personal portfolio",
-    language: "TypeScript",
+    author: "Luis Cardeña",
+    name: "Discogs LastFM Scrobbler",
+    description:
+      "MVP for having a product that can synchronize with your vinyl collection and scrobble listened tracks to your lastFM profile",
+    language: "Javascript",
+    link: "https://github.com/luisecm/lastfmdiscogsscrobbler",
+  },
+  {
+    author: "Satellite IM",
+    name: "E2E Automation Framework for Uplink Web",
+    description:
+      "Framework with extensive coverage of E2E flows to validate a web3 application for instant messaging and communities",
+    language: "Typescript",
+    link: "https://github.com/Satellite-im/automated-tests-web",
+  },
+  {
+    author: "Luis Cardeña",
+    name: "Alien Invasion",
+    description: "Galaxian simulator created with Python",
+    language: "Typescript",
+    link: "https://github.com/luisecm/alieninvasion",
   },
 ];
 

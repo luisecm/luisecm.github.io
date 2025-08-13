@@ -14,17 +14,8 @@ async function fetchBlogsFromMedium(url) {
   try {
     const response = await fetch(url);
     const { items } = await response.json();
-    populateBlogs(items, "blogs");
-  } catch (error) {
-    throw new Error(
-      `Error in fetching the blogs from Medium profile: ${error}`
-    );
-  }
-}
-
-async function fetchReposFromGit(url) {
-  try {
     const response = await fetch(url);
+
     const items = await response.json();
     populateRepo(items, "repos");
   } catch (error) {
@@ -436,5 +427,6 @@ fetchGitConnectedData(gitConnected);
 
 populateExp_Edu(experience, "experience");
 populateExp_Edu(education, "education");
+populateRepo(repos, "repositories");
 
 populateLinks(footer, "footer");
