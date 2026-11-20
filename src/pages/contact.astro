@@ -1,0 +1,142 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import { site, tone } from "../data/site";
+
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
+  "SDET / test automation enquiry"
+)}&body=${encodeURIComponent(
+  "Hi Luis,\n\nWhat we're building:\nWhat's going wrong:\nStack / frameworks:\nRough timeline:\n\n"
+)}`;
+
+// Each route degrades to email until you paste the real link into site.ts.
+const routes = [
+  {
+    id: "book",
+    label: tone.contactRouteLabel,
+    lede: tone.contactRouteLede,
+    href: site.booking || mailto,
+    note: site.booking
+      ? "Pick a slot that suits you"
+      : "Scheduling link coming soon — email works in the meantime",
+    cta: site.booking ? "Open my calendar" : "Email me to arrange a time",
+    primary: true,
+  },
+  {
+    id: "email",
+    label: "Email me directly",
+    lede: "The fastest route. Tell me what you're building and what's going wrong — three sentences is plenty to start.",
+    href: mailto,
+    note: site.email,
+    cta: "Write an email",
+    primary: false,
+  },
+  {
+    id: "brief",
+    label: "Send a project brief",
+    lede: "A short form covering scope, stack and timeline. Useful if you'd rather set out the detail before we talk.",
+    href: site.intakeForm || mailto,
+    note: site.intakeForm
+      ? "Takes about three minutes"
+      : "Form coming soon — email works in the meantime",
+    cta: site.intakeForm ? "Open the form" : "Email the detail instead",
+    primary: false,
+  },
+  // Only offered once site.resume points at a real file.
+  ...(site.resume
+    ? [
+        {
+          id: "resume",
+          label: "Download the one-pager",
+          lede: "A single-page PDF of experience and capabilities, for passing on to a hiring manager or a procurement team.",
+          href: site.resume,
+          note: "PDF · updated regularly",
+          cta: "Download PDF",
+          primary: false,
+        },
+      ]
+    : []),
+];
+---
+
+<Base
+  path="/contact"
+  title="Contact"
+  description="Get in touch with Luis Cardeña about SDET contract work, test automation audits, embedded quality engineering or product development."
+>
+  <Section
+    eyebrow="Contact"
+    title="Let's work out whether I can help"
+    as="h1"
+    lede="Four ways in, depending on how you prefer to start. All of them reach me directly — there's no agency, no account manager and no queue."
+    class="!pt-20 md:!pt-24"
+  />
+
+  <div class="shell">
+    <div class="grid gap-5 md:grid-cols-2">
+      {
+        routes.map((route) => (
+          <article
+            id={route.id}
+            class:list={[
+              "reveal card flex scroll-mt-24 flex-col p-7",
+              route.primary && "border-accent/30 bg-accent-soft md:col-span-2",
+            ]}
+          >
+            <h2 class="text-xl font-semibold tracking-tight">{route.label}</h2>
+            <p class="mt-3 max-w-xl flex-1 leading-relaxed text-ink-soft">
+              {route.lede}
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <a
+                href={route.href}
+                class:list={[
+                  "rounded-full px-5 py-2.5 text-sm font-semibold transition",
+                  route.primary
+                    ? "bg-ink text-paper hover:bg-ink-soft"
+                    : "border border-line-strong text-ink hover:border-ink hover:text-accent",
+                ]}
+              >
+                {route.cta}
+              </a>
+              <span class="text-xs text-muted">{route.note}</span>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- ── Practical details ──────────────────────────────── -->
+    <div class="reveal mt-16 grid gap-10 border-t border-line pt-12 sm:grid-cols-3">
+      <div>
+        <p class="eyebrow">Where I am</p>
+        <p class="mt-3 text-ink-soft">{site.location}</p>
+        <p class="mt-1 text-xs text-muted">{site.timezone}</p>
+      </div>
+      <div>
+        <p class="eyebrow">Response time</p>
+        <p class="mt-3 text-ink-soft">Within one business day, usually sooner.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Elsewhere</p>
+        <ul class="mt-3 space-y-1.5 text-sm">
+          <li>
+            <a
+              href={site.github}
+              rel="me noopener"
+              class="text-ink-soft underline-offset-4 hover:text-accent hover:underline"
+              >GitHub</a
+            >
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <p class="reveal mt-12 max-w-2xl text-sm leading-relaxed text-muted">
+      A note on confidentiality: I describe past clients by sector rather than by
+      name, and I don't share code that's under NDA. You can expect the same
+      discretion about your own work.
+    </p>
+  </div>
+</Base>

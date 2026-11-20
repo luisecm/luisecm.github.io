@@ -1,0 +1,54 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  lede?: string;
+  id?: string;
+  class?: string;
+  align?: "left" | "center";
+  /** Use "h1" for the heading that opens a page — one per page, for SEO. */
+  as?: "h1" | "h2";
+}
+const {
+  eyebrow,
+  title,
+  lede,
+  id,
+  class: klass = "",
+  align = "left",
+  as = "h2",
+} = Astro.props as Props;
+
+const Heading = as;
+---
+
+<section id={id} class:list={["py-20 md:py-28", klass]}>
+  <div class="shell">
+    {
+      (eyebrow || title || lede) && (
+        <header
+          class:list={[
+            "reveal max-w-2xl",
+            align === "center" && "mx-auto text-center",
+          ]}
+        >
+          {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+          {title && (
+            <Heading
+              class:list={[
+                "display mt-3 text-balance",
+                as === "h1" ? "text-hero" : "text-title",
+              ]}
+            >
+              {title}
+            </Heading>
+          )}
+          {lede && (
+            <p class="mt-4 text-lg leading-relaxed text-muted">{lede}</p>
+          )}
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>

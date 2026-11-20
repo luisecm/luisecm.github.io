@@ -1,0 +1,267 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import CtaBlock from "../components/CtaBlock.astro";
+import FaqList from "../components/FaqList.astro";
+import PainPoints from "../components/PainPoints.astro";
+import {
+  site,
+  hero,
+  quickFacts,
+  stats,
+  services,
+  capabilities,
+  experience,
+  featuredCaseStudies,
+  projects,
+} from "../data/site";
+
+const featuredProjects = projects.filter((p) => p.featured).slice(0, 4);
+// Recruiters scan the last few roles; the rest lives on /about.
+const recentRoles = experience.slice(0, 4);
+---
+
+<Base path="/">
+  <!-- ── Hero ─────────────────────────────────────────────── -->
+  <section class="pt-20 pb-14 md:pt-28 md:pb-20">
+    <div class="shell">
+      <p class="eyebrow">{hero.eyebrow}</p>
+
+      <h1 class="display mt-5 max-w-4xl text-mega text-balance">
+        I make shipping safe —<br class="hidden sm:inline" />
+        then I help you ship.
+      </h1>
+
+      <p class="mt-7 max-w-2xl text-lg leading-relaxed text-ink-soft">
+        {hero.subheading}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3">
+        <a
+          href="/contact#book"
+          class="rounded-full bg-ink px-6 py-3 text-sm font-medium text-paper transition hover:bg-ink-soft"
+          >{hero.primary.label}</a
+        >
+        <a
+          href="/work"
+          class="rounded-full border border-line-strong px-6 py-3 text-sm font-medium text-ink transition hover:border-ink"
+          >See my work</a
+        >
+        {
+          site.resume && (
+            <a
+              href={site.resume}
+              class="px-2 py-3 text-sm font-medium text-accent underline-offset-4 hover:underline"
+            >
+              Download CV
+            </a>
+          )
+        }
+      </div>
+
+      <!-- Quick facts: what a recruiter checks before reading anything else. -->
+      <dl
+        class="mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 md:grid-cols-4"
+      >
+        {
+          quickFacts.map((fact) => (
+            <div>
+              <dt class="eyebrow">{fact.label}</dt>
+              <dd class="mt-1.5 text-sm text-ink">{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Experience ───────────────────────────────────────── -->
+  <Section
+    eyebrow="Experience"
+    title="Fourteen years in quality engineering"
+    lede="Employers are described by sector rather than named. Happy to talk specifics on a call."
+    class="border-t border-line bg-surface"
+  >
+    <ol class="mt-10 divide-y divide-line border-y border-line">
+      {
+        recentRoles.map((job) => (
+          <li class="reveal grid gap-1 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6">
+            <span class="text-sm text-muted">{job.period}</span>
+            <div>
+              <h3 class="font-medium text-ink">{job.title}</h3>
+              <p class="mt-0.5 text-sm text-accent">{job.org}</p>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">{job.note}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="reveal mt-7">
+      <a
+        href="/about"
+        class="text-sm font-medium text-accent underline-offset-4 hover:underline"
+        >Full history and background →</a
+      >
+    </p>
+  </Section>
+
+  <!-- ── Selected work ────────────────────────────────────── -->
+  <Section
+    eyebrow="Selected work"
+    title="Proof, not adjectives"
+    lede="Client names are withheld where the engagement is confidential. The open-source work is public, and you can read every line of it."
+    class="border-t border-line"
+  >
+    <div class="mt-10 divide-y divide-line border-y border-line">
+      {
+        featuredCaseStudies.map((study) => (
+          <article class="reveal grid gap-4 py-8 md:grid-cols-[1fr_1.6fr] md:gap-10">
+            <div>
+              <p class="text-sm text-muted">{study.period}</p>
+              <h3 class="mt-1.5 text-lg font-medium">{study.client}</h3>
+              <p class="mt-0.5 text-sm text-muted">{study.sector}</p>
+            </div>
+
+            <div>
+              <p class="text-lg leading-snug text-balance">{study.headline}</p>
+              <ul class="mt-4 space-y-1.5">
+                {study.outcome.slice(0, 3).map((result) => (
+                  <li class="flex gap-2.5 text-sm leading-relaxed text-ink-soft">
+                    <span
+                      class="mt-2 h-1 w-1 shrink-0 rounded-full bg-line-strong"
+                      aria-hidden="true"
+                    />
+                    {result}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`/work#${study.slug}`}
+                class="mt-4 inline-block text-sm font-medium text-accent underline-offset-4 hover:underline"
+              >
+                Read the detail →
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="reveal mt-7">
+      <a
+        href="/work"
+        class="text-sm font-medium text-accent underline-offset-4 hover:underline"
+        >All case studies →</a
+      >
+    </p>
+
+    <!-- Open-source work, kept compact so it supports rather than competes. -->
+    <div class="reveal mt-14 border-t border-line pt-8">
+      <p class="eyebrow">Also on GitHub</p>
+      <ul class="mt-5 grid gap-x-10 gap-y-3 sm:grid-cols-2">
+        {
+          featuredProjects.map((project) => (
+            <li class="text-sm">
+              <span class="font-medium text-ink">{project.name}</span>
+              <span class="text-muted"> — {project.description}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-5">
+        <a
+          href="/projects"
+          class="text-sm font-medium text-accent underline-offset-4 hover:underline"
+          >All projects →</a
+        >
+      </p>
+    </div>
+  </Section>
+
+  <!-- ── Skills ───────────────────────────────────────────── -->
+  <Section
+    eyebrow="Skills & tools"
+    title="What I work in"
+    class="border-t border-line bg-surface"
+  >
+    <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        capabilities.map((group) => (
+          <div class="reveal">
+            <h3 class="text-sm font-semibold text-ink">{group.title}</h3>
+            <ul class="mt-3 space-y-1.5">
+              {group.items.map((item) => (
+                <li class="text-sm text-muted">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <dl class="mt-14 grid gap-x-8 gap-y-8 border-t border-line pt-10 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        stats.map((stat) => (
+          <div class="reveal flex flex-col-reverse">
+            <dt class="mt-1.5 text-sm leading-relaxed text-muted">
+              {stat.label}
+            </dt>
+            <dd class="display text-4xl text-ink">{stat.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <!-- ── Services ─────────────────────────────────────────── -->
+  <Section
+    eyebrow="Consulting"
+    title="Four ways to work together"
+    lede="Most engagements start with an audit, because it's the cheapest way for both of us to find out whether I can help."
+    class="border-t border-line"
+  >
+    <div class="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
+      {
+        services.map((service) => (
+          <article class="reveal">
+            <div class="flex items-baseline gap-3">
+              <h3 class="text-lg font-medium">{service.name}</h3>
+              {service.featured && (
+                <span class="eyebrow text-accent">Most asked for</span>
+              )}
+            </div>
+            <p class="mt-0.5 text-sm text-muted">{service.shape}</p>
+            <p class="mt-3 leading-relaxed text-ink-soft">{service.summary}</p>
+            <a
+              href={`/services#${service.id}`}
+              class="mt-3 inline-block text-sm font-medium text-accent underline-offset-4 hover:underline"
+            >
+              What's included →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+
+    <PainPoints />
+  </Section>
+
+  <!-- ── FAQ ──────────────────────────────────────────────── -->
+  <Section
+    eyebrow="Questions"
+    title="The things people ask first"
+    class="border-t border-line bg-surface"
+  >
+    <FaqList limit={5} />
+    <p class="reveal mt-7">
+      <a
+        href="/services#faq"
+        class="text-sm font-medium text-accent underline-offset-4 hover:underline"
+        >Read all questions →</a
+      >
+    </p>
+  </Section>
+
+  <CtaBlock />
+</Base>

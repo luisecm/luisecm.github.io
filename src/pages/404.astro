@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { nav } from "../data/site";
+---
+
+<Base path="/404" title="Page not found" description="That page could not be found. Head back to the homepage, or jump to services, case studies, projects or contact.">
+  <section class="shell flex min-h-[60vh] flex-col justify-center py-24">
+    <p class="eyebrow">Error 404</p>
+    <h1 class="mt-4 text-hero font-semibold tracking-tight">
+      This test case doesn't exist
+    </h1>
+    <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+      The page you asked for isn't here. Not every broken link is a bug worth
+      fixing, but this one might be — let me know if you followed it from
+      somewhere on this site.
+    </p>
+    <nav class="mt-9 flex flex-wrap gap-3" aria-label="Recovery links">
+      <a
+        href="/"
+        class="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition hover:bg-ink-soft"
+        >Back to the homepage</a
+      >
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-full border border-line-strong px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink hover:text-accent"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+</Base>

@@ -1,0 +1,130 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import { site, meta } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path-only canonical, e.g. "/services" */
+  path?: string;
+}
+
+const { title, description, path = "/" } = Astro.props as Props;
+
+const pageTitle = title ? `${title} — ${site.name}` : meta.title;
+const pageDesc = description ?? meta.description;
+const canonical = new URL(path, Astro.site ?? site.url).toString();
+const ogImage = new URL("/og.png", Astro.site ?? site.url).toString();
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  jobTitle: "Software Development Engineer in Test",
+  description: meta.description,
+  address: { "@type": "PostalAddress", addressLocality: "Mérida", addressCountry: "MX" },
+  sameAs: [site.github],
+  knowsAbout: [
+    "Test automation",
+    "Playwright",
+    "Cypress",
+    "Appium",
+    "WebdriverIO",
+    "CI/CD",
+    "Quality assurance",
+    "Mobile testing",
+    "API testing",
+  ],
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: `${site.name} — SDET & Test Automation Consulting`,
+  url: site.url,
+  description:
+    "Test automation, CI/CD and quality engineering consulting for web, mobile and Web3 products.",
+  areaServed: "Worldwide",
+  provider: { "@type": "Person", name: site.name },
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-pt-24">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@400;500;600&display=swap"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </head>
+
+  <body class="min-h-screen antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:font-medium focus:text-paper"
+      >Skip to content</a
+    >
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      const reveal = () => {
+        const nodes = document.querySelectorAll(".reveal");
+        if (!("IntersectionObserver" in window)) {
+          nodes.forEach((n) => n.classList.add("is-in"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+        );
+        nodes.forEach((n) => io.observe(n));
+      };
+      if (document.readyState !== "loading") reveal();
+      else document.addEventListener("DOMContentLoaded", reveal);
+    </script>
+  </body>
+</html>

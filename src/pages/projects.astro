@@ -1,0 +1,94 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import CtaBlock from "../components/CtaBlock.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { site, projects } from "../data/site";
+
+/**
+ * Enriches the curated list in site.ts with live stars and push dates at
+ * BUILD time. If GitHub is unreachable or rate-limits the runner, the build
+ * still succeeds and we just render the curated data as-is.
+ */
+type Enrichment = { stars: number; pushedAt: string | null };
+const enrichment = new Map<string, Enrichment>();
+
+try {
+  const res = await fetch(
+    "https://api.github.com/users/luisecm/repos?per_page=100&sort=pushed",
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "luisecm-homepage-build",
+      },
+      signal: AbortSignal.timeout(8000),
+    }
+  );
+  if (res.ok) {
+    const repos = (await res.json()) as Array<{
+      full_name: string;
+      stargazers_count: number;
+      pushed_at: string;
+    }>;
+    for (const repo of repos) {
+      enrichment.set(repo.full_name.toLowerCase(), {
+        stars: repo.stargazers_count,
+        pushedAt: repo.pushed_at,
+      });
+    }
+  } else {
+    console.warn(`[projects] GitHub returned ${res.status}; using curated data.`);
+  }
+} catch (err) {
+  console.warn(
+    `[projects] Could not reach GitHub (${(err as Error).message}); using curated data.`
+  );
+}
+
+const fmt = new Intl.DateTimeFormat("en", { month: "short", year: "numeric" });
+
+const items = projects.map((project) => {
+  const live = enrichment.get(project.repo.toLowerCase());
+  return {
+    ...project,
+    stars: live?.stars ?? 0,
+    updated: live?.pushedAt ? fmt.format(new Date(live.pushedAt)) : null,
+  };
+});
+
+const featured = items;
+---
+
+<Base
+  path="/projects"
+  title="Projects"
+  description="Open-source projects and personal builds by Luis Cardeña — test automation frameworks, mobile apps and full-stack side projects."
+>
+  <Section
+    eyebrow="Projects"
+    title="Built on my own time"
+    as="h1"
+    lede="A curated few, rather than everything I have ever pushed. These are the ones I actually built out and still maintain — my test automation work lives on the work page instead."
+    class="!pt-20 md:!pt-24"
+  />
+
+  <div class="shell">
+    <div class="grid gap-5 md:grid-cols-2">
+      {featured.map((project) => <ProjectCard project={project} />)}
+    </div>
+
+    <p class="reveal mt-10">
+      <a
+        href={site.github}
+        rel="noopener"
+        class="font-medium text-accent underline-offset-4 hover:underline"
+        >See all repositories on GitHub →</a
+      >
+    </p>
+  </div>
+
+  <CtaBlock
+    heading="Need something like this built?"
+    lede="I take on feature work, integrations and full product builds — with tests written alongside the feature rather than promised for later."
+  />
+</Base>

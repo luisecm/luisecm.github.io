@@ -1,0 +1,193 @@
+---
+import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
+import CtaBlock from "../components/CtaBlock.astro";
+import FaqList from "../components/FaqList.astro";
+import { services, capabilities } from "../data/site";
+
+const steps = [
+  {
+    n: "01",
+    title: "Intro call",
+    body: "Thirty minutes on what you're building and what's going wrong. I'll tell you straight away if this isn't a problem I'm good at.",
+  },
+  {
+    n: "02",
+    title: "Scoped proposal",
+    body: "A written scope with a fixed price or a weekly rate, what you get, and what I need from your team. No open-ended hourly billing.",
+  },
+  {
+    n: "03",
+    title: "First week",
+    body: "Repo access, environment set up, and a first pass at the problem. You'll see something concrete inside the first week, every time.",
+  },
+  {
+    n: "04",
+    title: "Weekly rhythm",
+    body: "A short written update every week: what moved, what's blocked, what I need. You never have to ask what I'm working on.",
+  },
+  {
+    n: "05",
+    title: "Handover",
+    body: "Documentation, a contribution guide and a walkthrough with your engineers. The work has to keep running once I'm gone.",
+  },
+];
+---
+
+<Base
+  path="/services"
+  title="Services"
+  description="Test automation audits, embedded SDET retainers, greenfield automation builds and product engineering — for teams whose releases have stopped feeling safe."
+>
+  <Section
+    eyebrow="Services"
+    title="Four ways to work together"
+    as="h1"
+    lede="Every engagement is scoped in writing before it starts, with a fixed price or a weekly rate. You should always know what you're buying."
+    class="!pt-20 md:!pt-24"
+  />
+
+  <div class="shell space-y-5 pb-8">
+    {
+      services.map((service) => (
+        <article
+          id={service.id}
+          class:list={[
+            "reveal card scroll-mt-24 p-7 md:p-10",
+            service.featured && "border-accent/30 bg-accent-soft",
+          ]}
+        >
+          <div class="grid gap-8 lg:grid-cols-[1fr_1.15fr]">
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h2 class="text-2xl font-semibold tracking-tight">{service.name}</h2>
+                {service.featured && (
+                  <span
+                    class="rounded-full bg-ink px-2.5 py-1 text-[0.65rem] tracking-wider text-paper uppercase"
+                  >
+                    Most asked for
+                  </span>
+                )}
+              </div>
+              <p class="mt-2 text-xs text-muted">{service.shape}</p>
+
+              {service.price ? (
+                <p class="mt-5 text-3xl font-semibold tracking-tight text-accent">
+                  {service.price}
+                </p>
+              ) : (
+                <p class="mt-5 text-sm text-muted">
+                  Priced per engagement —{" "}
+                  <a
+                    href="#book"
+                    class="text-accent underline-offset-4 hover:underline"
+                  >
+                    ask for a quote
+                  </a>
+                  .
+                </p>
+              )}
+
+              <p class="mt-5 text-lg leading-snug font-medium text-balance">
+                {service.summary}
+              </p>
+              <p class="mt-4 leading-relaxed text-muted">{service.description}</p>
+              <p class="mt-5 border-l-2 border-accent/40 pl-4 text-sm text-ink-soft">
+                {service.best}
+              </p>
+            </div>
+
+            <div class="rounded-xl border border-line bg-surface p-6">
+              <p class="eyebrow">What you get</p>
+              <ul class="mt-4 space-y-3">
+                {service.deliverables.map((item) => (
+                  <li class="flex gap-3 text-sm leading-relaxed text-ink-soft">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="mt-0.5 shrink-0 text-accent"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="m5 13 4 4L19 7"
+                        stroke="currentColor"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#book"
+                class="mt-7 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition hover:bg-ink-soft"
+                >Enquire about {service.name}</a
+              >
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <!-- ── Process ──────────────────────────────────────────── -->
+  <Section
+    eyebrow="Process"
+    title="How an engagement actually runs"
+    lede="Consulting goes wrong when nobody can tell what's happening. This is the rhythm I keep."
+    class="border-t border-line"
+  >
+    <ol class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        steps.map((step) => (
+          <li class="reveal card p-6">
+            <span class="text-sm text-accent">{step.n}</span>
+            <h3 class="mt-3 text-lg font-semibold tracking-tight">{step.title}</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-muted">{step.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <!-- ── Toolkit ──────────────────────────────────────────── -->
+  <Section
+    eyebrow="Toolkit"
+    title="What I work in"
+    lede="I'll recommend based on your stack and your team's existing skills, not on what I most enjoy using."
+    class="border-t border-line"
+  >
+    <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        capabilities.map((group) => (
+          <div class="reveal card p-6">
+            <h3 class="text-sm font-semibold text-ink">{group.title}</h3>
+            <ul class="mt-4 space-y-2">
+              {group.items.map((item) => (
+                <li class="text-xs text-muted">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- ── FAQ ──────────────────────────────────────────────── -->
+  <Section
+    id="faq"
+    eyebrow="Questions"
+    title="Frequently asked"
+    class="border-t border-line"
+  >
+    <FaqList />
+  </Section>
+
+  <CtaBlock
+    heading="Tell me what's breaking"
+    lede="If you can describe the problem in three sentences, I can usually tell you on a first call whether it's a two-week fix or a two-month one."
+  />
+</Base>

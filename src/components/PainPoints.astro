@@ -1,0 +1,22 @@
+---
+import { painPoints } from "../data/site";
+// Static rather than a marquee: the scrolling version read as a marketing
+// device, which is exactly the tone this page is trying to avoid.
+---
+
+<div class="reveal mt-16 border-t border-line pt-10">
+  <p class="eyebrow">What teams call me about</p>
+  <ul class="mt-5 grid gap-x-10 gap-y-2.5 sm:grid-cols-2">
+    {
+      painPoints.map((point) => (
+        <li class="flex gap-3 text-sm leading-relaxed text-ink-soft">
+          <span
+            class="mt-2 h-1 w-1 shrink-0 rounded-full bg-line-strong"
+            aria-hidden="true"
+          />
+          {point}
+        </li>
+      ))
+    }
+  </ul>
+</div>
