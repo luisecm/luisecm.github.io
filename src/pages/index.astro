@@ -80,7 +80,7 @@ const recentRoles = experience.slice(0, 4);
     eyebrow="Experience"
     title="Fourteen years in quality engineering"
     lede="Employers are described by sector rather than named. Happy to talk specifics on a call."
-    class="border-t border-line bg-surface"
+    class="border-t border-line bg-accent-soft/60"
   >
     <ol class="mt-10 divide-y divide-line border-y border-line">
       {
@@ -183,7 +183,7 @@ const recentRoles = experience.slice(0, 4);
   <Section
     eyebrow="Skills & tools"
     title="What I work in"
-    class="border-t border-line bg-surface"
+    class="border-t border-line bg-accent-soft/60"
   >
     <div class="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
       {
@@ -207,7 +207,7 @@ const recentRoles = experience.slice(0, 4);
             <dt class="mt-1.5 text-sm leading-relaxed text-muted">
               {stat.label}
             </dt>
-            <dd class="display text-4xl text-ink">{stat.value}</dd>
+            <dd class="display text-5xl text-accent">{stat.value}</dd>
           </div>
         ))
       }
@@ -251,7 +251,7 @@ const recentRoles = experience.slice(0, 4);
   <Section
     eyebrow="Questions"
     title="The things people ask first"
-    class="border-t border-line bg-surface"
+    class="border-t border-line bg-accent-soft/60"
   >
     <FaqList limit={5} />
     <p class="reveal mt-7">
