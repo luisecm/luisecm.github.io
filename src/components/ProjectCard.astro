@@ -7,18 +7,19 @@ interface Props {
     language: string;
     tags: string[];
     private?: boolean;
+    url?: string;
     stars?: number;
     updated?: string | null;
   };
 }
 const { project } = Astro.props as Props;
 
-// Private repos render as a plain card so we never ship a link that 404s.
-const isLinked = !project.private;
+// An explicit url wins; otherwise link to GitHub, unless the repo is
+// private, in which case render a plain card rather than a dead link.
+const href = project.url ?? (project.private ? null : `https://github.com/${project.repo}`);
+const isLinked = href !== null;
 const Tag = isLinked ? "a" : "div";
-const linkProps = isLinked
-  ? { href: `https://github.com/${project.repo}`, rel: "noopener" }
-  : {};
+const linkProps = isLinked ? { href, rel: "noopener" } : {};
 const stars = project.stars ?? 0;
 ---
 

@@ -557,9 +557,24 @@ type Project = {
   featured: boolean;
   /** True while the repo is private — the card renders without a dead link. */
   private?: boolean;
+  /** Link somewhere other than GitHub, e.g. a product site. */
+  url?: string;
 };
 
 export const projects: Project[] = [
+  {
+    name: "Tinyboard",
+    // The repo is private (it is the `materapp` repo), so the card links to
+    // the public product site instead of GitHub.
+    repo: "luisecm/materapp",
+    private: true,
+    url: "https://www.tinyboard.co",
+    description:
+      "A school-to-family daily-updates platform: schools post what each child did, share a calendar and message guardians — with children's media locked behind signed URLs rather than guessable ones. Expo app, Next.js admin, Supabase with row-level security.",
+    language: "TypeScript",
+    tags: ["React Native", "Next.js", "Supabase", "Product"],
+    featured: true,
+  },
   {
     name: "pequeguia",
     repo: "luisecm/pequeguia",
