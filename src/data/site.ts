@@ -285,6 +285,8 @@ type CaseStudy = {
   role: string;
   /** True for your own builds, so they are never mistaken for client work. */
   personal?: boolean;
+  /** Overrides the default "Personal project" / "Confidential" badge text. */
+  badge?: string;
   headline: string;
   problem: string;
   approach: string[];
@@ -400,6 +402,46 @@ export const caseStudies: CaseStudy[] = [
     links: [],
   },
   {
+    slug: "tinyboard",
+    since: 2025,
+    until: null,
+    featured: true,
+    client: "Tinyboard",
+    sector: "My own product · school–family communication",
+    period: "2025 – present",
+    role: "Sole engineer — architecture, delivery and quality",
+    personal: true,
+    badge: "Own product",
+    headline:
+      "A school-to-family platform where the privacy model and the test layer were designed first",
+    problem:
+      "The app my child's school used posted children's photos behind plain, guessable URLs — anyone who got hold of a link could reach them. I wanted to build the same daily-updates experience for families without that exposure, which meant treating media access control and children's data as architectural constraints rather than features to bolt on later.",
+    approach: [
+      "Built it as a monorepo: an Expo / React Native app for guardians and a Next.js admin for school staff, over shared typed packages",
+      "Enforced access in Postgres itself with row-level security, so a bug in a client cannot expose another family's data",
+      "Designed a media pipeline where no photo is reachable from a plain URL — every asset is served through a signed, authorised path",
+      "Covered the row-level security policies with pgTAP tests, so the security model is verified by tests rather than by intention",
+      "Wired the full check suite: lint, typecheck, Vitest, database security tests and an end-to-end backend smoke run",
+      "Built the release path to TestFlight and Play internal testing through EAS, with a written runbook",
+    ],
+    outcome: [
+      "Running in production; store distribution in internal beta while the later phases land",
+      "Auth, guardian invites and consent, daily posts and the secure media pipeline all shipped",
+      "Security model covered by automated database-level tests rather than by manual review",
+    ],
+    stack: [
+      "TypeScript",
+      "React Native / Expo",
+      "Next.js",
+      "Supabase",
+      "Postgres + RLS",
+      "pgTAP",
+      "Vitest",
+      "EAS",
+    ],
+    links: [{ label: "tinyboard.co", href: "https://www.tinyboard.co" }],
+  },
+  {
     slug: "proptech-tours",
     since: 2025,
     until: null,
@@ -420,27 +462,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["TypeScript", "React", "3D tours"],
     links: [],
   },
-  {
-    slug: "loyalty-wallet",
-    since: 2025,
-    until: null,
-    featured: false,
-    client: "Wallet-based loyalty cards",
-    sector: "Personal side project · in progress",
-    period: "2025 – present",
-    role: "Built independently, in my own time",
-    personal: true,
-    headline: "Loyalty cards that live in Apple and Google Wallet",
-    problem:
-      "Plastic loyalty cards get left at home. I wanted to work out what issuing and updating native wallet passes actually involves end to end.",
-    approach: [
-      "Built the card issuing and update pipeline against native wallet passes",
-      "Designed the merchant-side flow for enrolment and rewards",
-    ],
-    outcome: ["Still in development — a personal build, not commissioned work"],
-    stack: ["TypeScript", "Wallet passes", "Node"],
-    links: [],
-  },
+
 ];
 
 /**
@@ -538,18 +560,6 @@ type Project = {
 };
 
 export const projects: Project[] = [
-  {
-    name: "materapp",
-    // Repo is private for now — set `private: false` once you make it public
-    // and the card will start linking to GitHub automatically.
-    repo: "luisecm/materapp",
-    private: true,
-    description:
-      "A school ecosystem app bringing homework, progress tracking and announcements together for students, parents and teachers. The largest thing I've built end to end on my own.",
-    language: "TypeScript",
-    tags: ["React Native", "Product"],
-    featured: true,
-  },
   {
     name: "pequeguia",
     repo: "luisecm/pequeguia",

@@ -36,7 +36,7 @@ import { caseStudiesByRecency } from "../data/site";
                       : "border-line-strong text-muted",
                   ]}
                 >
-                  {study.personal ? "Personal project" : "Confidential"}
+                  {study.badge ?? (study.personal ? "Personal project" : "Confidential")}
                 </span>
               </div>
               <p class="mt-1.5 text-sm text-muted">{study.sector}</p>
